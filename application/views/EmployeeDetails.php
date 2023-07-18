@@ -1,5 +1,3 @@
-<?php include("include/header.php"); ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,13 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo base_url('application/css/Home.css') ?>" />
     <title>Document</title>
 </head>
 
 <body>
     <div class="container">
-        <h1>Employee Details</h1>
+        <h3>Employee Details</h3>
         <div class="form-group row">
         </div>
         <?php
@@ -32,13 +29,13 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label"><b>First Name:</b></label>
                         <div class="col-sm-10">
-                        <?php echo ucfirst($data->firstname) ?>
+                            <?php echo ucfirst($data->firstname) ?>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label"><b>Last Name:</b></label>
                         <div class="col-sm-10">
-                        <?php echo ucfirst($data->lastname) ?>
+                            <?php echo ucfirst($data->lastname) ?>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -88,24 +85,17 @@
                                     </li>
                                 <?php }
                             } else { ?>
-                                No technologies found
-                            <?php } ?>
+                            No technologies found
+                        <?php } ?>
                         </div>
                     </div>
                 </form>
             <?php }
         } else { ?>
-            <div>No Record found</div>
+        <div>No Record found</div>
         <?php } ?>
-    </div>
-    <div>
-        <a href="http://localhost/CodeIgniter/index.php/employeecontroller/employeeDetails">
-            <button type="button" class="btn btn-primary">Back</button>
-        </a>
     </div>
 
 </body>
 
 </html>
-
-<?php include("include/footer.php");?>

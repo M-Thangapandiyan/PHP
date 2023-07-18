@@ -1,10 +1,16 @@
-.create {
-     display: flex;
-     flex-direction: row-reverse;
-     margin-top:20px;
-     margin-bottom:20px;
-     margin-right: 50px;
-}
 
+.parent-container {
+     position: relative;
+     height: 200px;
+     width: 400px;
+     border: 1px solid #ccc;
+   }
+   
+   .pull-right {
+     position: absolute;
+     top: 20px;
+     right: 20px;
+   }
+   
 
 

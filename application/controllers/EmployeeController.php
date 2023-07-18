@@ -9,11 +9,10 @@ class EmployeeController extends CI_Controller
     $this->load->helper('url');
     $this->load->model('EmployeeModel');
   }
-  public function index() 
+  public function index()
   {
     $this->load->view('EmployeeIndex');
   }
-
 
   public function employeeDetails()
   {
@@ -26,8 +25,8 @@ class EmployeeController extends CI_Controller
     $this->load->library('form_validation');
     $this->form_validation->set_rules('firstname', 'FirstName', 'required|min_length[5]|max_length[12]');
     $this->form_validation->set_rules('lastname', 'LastName', 'required|min_length[5]|max_length[12]');
-    $this->form_validation->set_rules('email', 'Email', 'regex_match[/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/]');
-    $this->form_validation->set_rules('phonenumber', 'PhoneNumber', 'required|regex_match[/^[0-9]{10}$/]');
+    $this->form_validation->set_rules('email', 'Email', 'required|regex_match[/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/]|is_unique[employee.email]');
+    $this->form_validation->set_rules('phonenumber', 'PhoneNumber', 'required');
     $this->form_validation->set_rules('dob', 'DOB', 'required');
     $this->form_validation->set_rules('gender', 'Gender', 'required|in_list[Male,Female,Other]');
     $this->form_validation->set_rules('designationid', 'Designation', 'required');
@@ -60,7 +59,6 @@ class EmployeeController extends CI_Controller
   {
     $this->EmployeeModel->deleteData($employee_id);
   }
-
   public function view($employee_id)
   {
     $results['result'] = $this->EmployeeModel->read($employee_id);

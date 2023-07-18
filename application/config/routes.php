@@ -41,16 +41,15 @@
 // $route['default_controller'] = "welcome";
 // $route['404_override'] = '';
 
-$route['default_controller'] = "EmployeeController";
+$route['default_controller'] = "employeecontroller";
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-
-$route['create'] = "employeecontroller/create";
-$route['delete/(:num)'] = "employeecontroller/delete/$1";
-$route['view/(:num)'] = 'employeecontroller/view/$1';
-$route['edit/(:num)'] = "employeecontroller/edit/$1";
-$route['employeeinformations'] = "employeecontroller/employeeDetails";
+// $route['create'] = "employeecontroller/create";
+// $route['delete/(:num)'] = "employeecontroller/delete/$1";
+// $route['view/(:num)'] = 'employeecontroller/view/$1';
+// $route['edit/(:num)'] = "employeecontroller/edit/$1";
+// $route['employeeinformations'] = "employeecontroller/employeeDetails";
 
 
 /* End of file routes.php */

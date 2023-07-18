@@ -5,20 +5,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
 
 <body>
+<div class="modal fade" id="my-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Success</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="result">
+                        <p>Successfully updated</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
-        <h1>Employee update Form</h1>
+        <h4>Employee update Form</h4>
         <?php echo validation_errors(); 
         
         foreach ($updatedata as $data) {
            
             ?>
-            <form class="form-horizontal" 
-                action="http://localhost/CodeIgniter/index.php/employeecontroller/edit/<?Php echo $data->employee_id; ?>"
-                method="post">
+                <form class="form-horizontal" method="post">
                 <div class="form-group row">
                     <label for="firstname" class="col-sm-2 col-form-label"><b>First
                             Name:</b></label>
@@ -81,7 +101,6 @@
                     </div>
                 </div>
 
-
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label"><b>Designation:</b></label>
                     <div class="col-sm-10">
@@ -128,18 +147,31 @@
                 </div>
 
                 <div class="form-group row">
-                    <div class="col-md-12 text-center">
-                        <a href="http://localhost/CodeIgniter/index.php/employeecontroller/employeeDetails">
-                            <button type="button" class="btn btn-primary">Back</button>
-                        </a>
-                        <button type="submit" class="btn btn-primary">Update</button>
-                    </div>
+                <div class="col-md-12 text-center">
+                    <button value="Submit" id="submit" type="submit" class="btn btn-primary">submit</button>
                 </div>
+            </div>
             </form>
             <?php
         }
         ?>
     </div>
+    <script>
+        $(document).ready(function () {
+            $('form').submit(function (event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://localhost/CodeIgniter/index.php/employeecontroller/edit/<?php echo $data->employee_id; ?>',
+                    data: formData,
+                    success: function (response) {
+                        $('#my-modal').modal('show');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -17,7 +17,7 @@ class EmployeeModel extends CI_Model
             echo "Data stored successfully.";
             return $this->db->insert_id();
         } else {
-            echo "Data not stored.";
+            return false;
         }
     }
     public function readData()
@@ -86,7 +86,9 @@ class EmployeeModel extends CI_Model
         $this->db->update('employee', $data);
 
         if ($this->db->affected_rows() > 0) {
-            echo "updated successfully.";
+            $readData = $this->db->query('SELECT * FROM employee ORDER BY employee_id DESC LIMIT 1');
+            $result = $readData->row();
+            return $result->employee_id;
         } else {
             echo "Not updated successfully.";
         }
@@ -94,11 +96,9 @@ class EmployeeModel extends CI_Model
 
     public function getLastId()
     {
-           $readData = $this->db->query('SELECT * FROM employee ORDER BY employee_id DESC LIMIT 1');
-            $result = $readData->row();
-            return $result->employee_id;
-
-
+        $readData = $this->db->query('SELECT * FROM employee ORDER BY employee_id DESC LIMIT 1');
+        $result = $readData->row();
+        return $result->employee_id;
     }
 
     public function storeEmployeeTechnology($employee_id, $technology_id)
@@ -112,11 +112,24 @@ class EmployeeModel extends CI_Model
 
     public function employeeTechnology($employee_id, $technology_id)
     {
+        // $data = array(
+        //     'technology_id' => $technology_id
+        // );
+        // $this->db->where('employee_id', $employee_id);
+        // $this->db->update('employee_technology', $data);
+
+
+        $this->db->where('employee_id', $employee_id);
+        $this->db->delete('employee_technology');
+
+
         $data = array(
+            'employee_id' => $employee_id,
             'technology_id' => $technology_id
         );
-        $this->db->where('employee_id', $employee_id);
-        $this->db->update('employee_technology', $data);
+        $this->db->insert('employee_technology', $data);
+
+
     }
 
     public function getDesignation()
@@ -196,7 +209,7 @@ class EmployeeModel extends CI_Model
     //     $readData = $this->db->get('employee');
     //     return $readData->result();
 
-        // $this->db->select('employee_id');
+    // $this->db->select('employee_id');
     // $this->db->order_by('employee_id', 'DESC');
     // $this->db->limit(1);
     // $readData = $this->db->get('employee');
